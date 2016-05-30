@@ -1,0 +1,14 @@
+package XbeePacket;
+
+import com.digi.xbee.api.XBeeDevice;
+
+public class Main {
+
+	static String PORT = "/tty.usbserial-FTFOM49A";
+	static int BAUD_RATE = 9600;
+	
+	public static void main(String[] args) {
+		XBeeDevice myXbee = new XBeeDevice(PORT, BAUD_RATE);
+	}
+
+}

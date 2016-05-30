@@ -1,0 +1,67 @@
+import java.util.Scanner;
+
+import jssc.SerialPort;
+import jssc.SerialPortException;
+import jssc.SerialPortList;
+
+public class Main {
+
+	public Main() {
+		Scanner keyboard = new Scanner(System.in);
+
+		String[] portNames = SerialPortList.getPortNames();
+		System.out.println("****************** PORT NAMES ******************");
+
+		for (int i = 0; i < portNames.length; i++) {
+			System.out.println("*** \tPORT " + (i + 1) + ": " + portNames[i] + " ***");
+		}
+		System.out.println("************************************************");
+
+		System.out.println();
+		System.out.print("Election: ");
+		int num = keyboard.nextInt();
+		keyboard.nextLine();
+		num--;
+
+		// In the constructor pass the name of the port with which we work
+		SerialPort serialPort = new SerialPort(portNames[num]);
+
+		// Open port
+		try {
+			serialPort.openPort();
+		} catch (SerialPortException e) {
+			System.err.println("Error opening serial port");
+			return;
+		}
+		
+		// We expose the settings. You can also use this line -
+		// serialPort.setParams(9600, 8, 1, O);
+		try {
+			serialPort.setParams(SerialPort.BAUDRATE_9600, SerialPort.DATABITS_8, SerialPort.STOPBITS_1,
+					SerialPort.PARITY_ODD);
+		} catch (SerialPortException e) {
+			System.err.println("Error setting serial parameters");
+			return;
+		}
+
+		loop();
+
+		try {
+			serialPort.closePort();
+		} catch (SerialPortException e) {
+			System.err.println("Error closing serial port");
+			return;
+		}
+
+	}
+
+	public static void main(String[] args) {
+		Main main = new Main();
+	}
+
+	private void loop() {
+		// TODO Auto-generated method stub
+
+	}
+
+}

@@ -1,0 +1,87 @@
+
+import java.util.Scanner;
+
+import com.digi.xbee.api.exceptions.XBeeException;
+
+import jssc.SerialPort;
+import jssc.SerialPortEvent;
+import jssc.SerialPortEventListener;
+import jssc.SerialPortException;
+import jssc.SerialPortList;
+
+public class Main implements SerialPortEventListener {
+
+	SerialPort serialPort = null;
+	long lastTime = 0;
+	
+	public static void main (String[] args) {
+		Main main = new Main();
+	}
+
+	public Main() {
+		Scanner keyboard = new Scanner(System.in);
+
+		String[] portNames = SerialPortList.getPortNames();
+		System.out.println("******************** PORT NAMES ********************");
+
+		for (int i = 0; i < portNames.length; i++) {
+			System.out.println("*** \tPORT " + (i + 1) + ": " + portNames[i] + " \t***");
+		}
+		System.out.println("****************************************************");
+
+		System.out.println();
+		System.out.print("Election: ");
+		int num = keyboard.nextInt();
+		keyboard.nextLine();
+		num--;
+
+		// In the constructor pass the name of the port with which we work
+		serialPort = new SerialPort(portNames[num]);
+
+		// Open port
+		try {
+			serialPort.openPort();
+		} catch (SerialPortException e) {
+			System.err.println("Error opening serial port");
+			return;
+		}
+
+		try {
+			serialPort.setParams(SerialPort.BAUDRATE_9600, SerialPort.DATABITS_8, SerialPort.STOPBITS_1,
+					SerialPort.PARITY_ODD);
+		} catch (SerialPortException e) {
+			System.err.println("Error setting serial parameters");
+			return;
+		}
+		
+		try {
+			serialPort.addEventListener(this);
+		} catch (SerialPortException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		keyboard.nextLine();
+
+		try {
+			serialPort.closePort();
+		} catch (SerialPortException e) {
+			System.err.println("Error closing serial port");
+			return;
+		}
+
+	}
+
+	@Override
+	public void serialEvent(SerialPortEvent event) {
+		if (event.isRXCHAR() && event.getEventValue() > 0) {
+			try {
+				String receivedData = serialPort.readHexString();
+				System.out.println("Received response: " + receivedData);
+			} catch (SerialPortException ex) {
+				System.out.println("Error in receiving string from COM-port: " + ex);
+			}
+		}
+	}
+
+}
