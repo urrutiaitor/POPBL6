@@ -16,3 +16,5 @@
 2016-06-04 10:33:04,282 [main] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache file is out-of-date. Remote download required.
 2016-06-05 11:13:43,444 [main] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache file is out-of-date. Remote download required.
 2016-06-06 09:41:18,029 [main] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache file is not out-of-date. No remote download required.
+2016-06-06 14:53:59,403 [main] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache file is out-of-date. Remote download required.
+2016-06-06 16:08:21,772 [main] WARN  o.e.r.i.c.r.ChainCompletionProposalComputer - Can't handle %s as source for finding entrypoints.

@@ -37,6 +37,7 @@ public class UsuarioDialog extends JDialog implements ActionListener{
 	JTextField paisT;
 	JPasswordField contrasenaT;
 	JTextField DNIT;
+	JTextField numeroT;
 	
 	public UsuarioDialog () {
 		this.setLocation(100, 100);
@@ -57,7 +58,7 @@ public class UsuarioDialog extends JDialog implements ActionListener{
 	}
 
 	private Container createTextField () {
-		JPanel panel = new JPanel(new GridLayout(7, 1));
+		JPanel panel = new JPanel(new GridLayout(8, 1));
 		
 		nombreT = new JTextField();
 		nombreT.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.CYAN),
@@ -100,6 +101,11 @@ public class UsuarioDialog extends JDialog implements ActionListener{
 				BorderFactory.createTitledBorder("DNI")));
 		panel.add(DNIT);
 		
+		numeroT = new JTextField();
+		numeroT.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.CYAN),
+				BorderFactory.createTitledBorder("Telefono")));
+		panel.add(numeroT);
+		
 		return panel;
 	}
 
@@ -112,7 +118,7 @@ public class UsuarioDialog extends JDialog implements ActionListener{
 					new Date(Integer.parseInt(anoT.getText()) - 1900, Integer.parseInt(mesT.getText()),
 							Integer.parseInt(diaT.getText())),
 					localidadT.getText(), paisT.getText(), contrasenaT.getText().hashCode(),
-					DNIT.getText());
+					DNIT.getText(), numeroT.getText());
 			int id = u.submit();
 			JOptionPane.showMessageDialog(this, "Se ha asignado el id: " + id);
 		}

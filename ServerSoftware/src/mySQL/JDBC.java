@@ -254,6 +254,34 @@ public class JDBC {
 		}
 		return -1;
 	}
+	
+	private int comprobarUsuario(String numero) {
+		String sql = "SELECT usuarioId "
+				+ "FROM usuario"
+				+ "WHERE numero = \"" + numero + "\";";
+		
+		try {
+			conn = getConnection();
+			getStatements();
+			result = stmt.executeQuery(sql);
+
+			if (result.next()) {
+				int usuarioId = result.getInt(1);
+				
+				conn.close();
+				
+				return usuarioId;
+			} else {
+				conn.close();
+				return -1;
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return -1;
+	}
 
 	public int comprobarEstancia(String usuario, String contrasena, Date inicio, Date fin) {
 		int habitacionId = -1;
@@ -275,6 +303,37 @@ public class JDBC {
 				habitacionId = result.getInt(2);
 				inicio = result.getDate(3);
 				fin = result.getDate(4);
+			}
+
+			conn.close();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return habitacionId;
+		
+	}
+	
+	public int comprobarEstancia(String numero) {
+		int habitacionId = -1;
+		
+		int usuarioId = comprobarUsuario(numero);
+		
+		if (usuarioId == -1) return -1;
+		
+		String sql = "SELECT usuarioId, habitacionId "
+				+ "FROM hospeda"
+				+ "WHERE usuarioId = \"" + usuarioId + "\";";
+		
+		try {
+			conn = getConnection();
+			getStatements();
+			result = stmt.executeQuery(sql);
+
+			while (result.next()) {
+				habitacionId = result.getInt(2);
 			}
 
 			conn.close();

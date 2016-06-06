@@ -3,6 +3,7 @@ package main;
 import java.util.Scanner;
 
 import cliente.ConnCliente;
+import gsm.SerialGSM;
 import xbee.SerialXBee;
 
 
@@ -14,13 +15,19 @@ public class Main {
 		System.out.println("Server IP: ");
 		String serverIp = keyboard.nextLine();
 		
+		/*
+		
 		ConnCliente connCliente = new ConnCliente(serverIp);
 		
 		SerialXBee xbee = new SerialXBee(serverIp);
 		
+		*/
+		
+		SerialGSM sGSM = new SerialGSM(serverIp);
+		
 		keyboard.nextLine();
 		
-		xbee.closeConn();
+		sGSM.closeConn();
 	}
 
 }

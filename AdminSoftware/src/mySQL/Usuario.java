@@ -12,8 +12,9 @@ public class Usuario {
 	String pais;
 	int contrasena;
 	String DNI;
+	String numero;
 	
-	public Usuario(String nombre, String apellido, Date fechaNacimiento, String localidad, String pais, int contrasena, String DNI) {
+	public Usuario(String nombre, String apellido, Date fechaNacimiento, String localidad, String pais, int contrasena, String DNI, String numero) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -22,14 +23,15 @@ public class Usuario {
 		this.pais = pais;
 		this.contrasena = contrasena;
 		this.DNI = DNI;
+		this.numero = numero;
 	}
 	
 	public int submit() {
 		JDBC dbConnection = new JDBC();
 
-		String sql = "INSERT INTO usuario (nombre, apellido, fechaNacimiento, localidad, pais, contrasena, DNI) "
+		String sql = "INSERT INTO usuario (nombre, apellido, fechaNacimiento, localidad, pais, contrasena, DNI, numero) "
 				+ "VALUES ('" + nombre + "', '" + apellido + "', '" + fechaNacimiento.toString() + "', '"
-				+ localidad + "', '"+ pais + "', '" + contrasena + "', '" + DNI + "');";
+				+ localidad + "', '"+ pais + "', '" + contrasena + "', '" + DNI + "', '" + numero + "');";
 
 		System.out.println(sql);
 		usuarioId = dbConnection.ejecutarUpdate(sql);
@@ -43,7 +45,7 @@ public class Usuario {
 	public String toString() {
 		return "Usuario [usuarioId=" + usuarioId + ", nombre=" + nombre + ", apellido=" + apellido
 				+ ", fechaNacimiento=" + fechaNacimiento + ", localidad=" + localidad + ", pais=" + pais
-				+ ", contrasena=" + contrasena + ", DNI=" + DNI + "]";
+				+ ", contrasena=" + contrasena + ", DNI=" + DNI + ", numero=" + numero + "]";
 	}
 	
 }

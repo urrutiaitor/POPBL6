@@ -1,0 +1,86 @@
+package gsm;
+
+import java.util.Observable;
+import java.util.Observer;
+import java.util.Scanner;
+
+import jssc.SerialPort;
+import jssc.SerialPortException;
+import jssc.SerialPortList;
+import mysql.JDBC;
+
+public class SerialGSM implements Observer {
+
+	SerialPort serialPortInput;
+	SerialPort serialPortOutput;
+	private SerialPort serialPort;
+	
+	InputGSM serialInput;
+	OutputGSM serialOutput;
+	
+	String serverIp;
+
+	public SerialGSM (String serverIp) {
+		this.serverIp = serverIp;
+		
+		Scanner keyboard = new Scanner(System.in);
+		
+		String[] portNames = SerialPortList.getPortNames();
+		System.out.println("************ PORT NAMES FOR GSM ***********");
+
+		for (int i = 0; i < portNames.length; i++) {
+			System.out.println("*** \t\tPORT " + (i + 1) + ": " + portNames[i] + " \t\t***");
+		}
+		System.out.println("*******************************************");
+
+		System.out.println();
+		System.out.print("Input line: ");
+		int input = keyboard.nextInt();
+		keyboard.nextLine();
+		input--;
+		
+		System.out.println();
+		System.out.print("Output line: ");
+		int output = keyboard.nextInt();
+		keyboard.nextLine();
+		output--;
+
+		serialPortInput = new SerialPort(portNames[input]);
+		serialPortOutput = new SerialPort(portNames[output]);
+		
+		serialInput = new InputGSM(serialPortInput);
+		serialOutput = new OutputGSM(serialPortOutput);
+		
+		serialOutput.addObserver(this);
+		
+		serialInput.inicializar();
+
+	}
+
+	public boolean closeConn () {
+		try {
+			serialPort.closePort();
+		} catch (SerialPortException e) {
+			System.err.println("Error closing GSM serial port");
+			return false;
+		}
+		
+		return true;
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		String data = (String) arg;
+		JDBC jdbc = new JDBC(serverIp);
+		
+		/*
+		 * 
+		 * LEER ENTRADA DE LLAMADA DE MOVIL
+		 * CUANDO LLEGA LA LLAMADA MIRAR EN LA BASE DE DATOS EL MOVIL
+		 * ENVIAR INFORMACION A ESE MOVIL
+		 * 
+		 */
+		
+		jdbc.
+	}
+}

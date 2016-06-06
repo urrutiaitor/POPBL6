@@ -1,0 +1,52 @@
+package gsm;
+
+import java.util.Scanner;
+
+import jssc.SerialPort;
+import jssc.SerialPortException;
+import jssc.SerialPortList;
+
+public class SerialGSM {
+
+	private SerialPort serialPort;
+
+	public SerialGSM () {
+		Scanner keyboard = new Scanner(System.in);
+		
+		String[] portNames = SerialPortList.getPortNames();
+		System.out.println("************ PORT NAMES FOR GSM ***********");
+
+		for (int i = 0; i < portNames.length; i++) {
+			System.out.println("*** \t\tPORT " + (i + 1) + ": " + portNames[i] + " \t\t***");
+		}
+		System.out.println("*******************************************");
+
+		System.out.println();
+		System.out.print("Election: ");
+		int num = keyboard.nextInt();
+		keyboard.nextLine();
+		num--;
+
+		// In the constructor pass the name of the port with which we work
+		serialPort = new SerialPort(portNames[num]);
+
+		// Open port
+		try {
+			serialPort.openPort();
+		} catch (SerialPortException e) {
+			System.err.println("Error opening serial port");
+			return;
+		}
+	}
+
+	public boolean closeConn () {
+		try {
+			serialPort.closePort();
+		} catch (SerialPortException e) {
+			System.err.println("Error closing GSM serial port");
+			return false;
+		}
+		
+		return true;
+	}
+}
