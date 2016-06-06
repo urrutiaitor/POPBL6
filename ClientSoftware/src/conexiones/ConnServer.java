@@ -23,6 +23,4 @@ public class ConnServer {
 		return new ArrayList<Temperatura>();
 	}
 
-	
-
 }

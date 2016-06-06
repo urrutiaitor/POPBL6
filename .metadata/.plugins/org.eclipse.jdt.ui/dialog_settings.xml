@@ -1,8 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
-	<item value="/Users/aitorurrutia/Downloads" key="org.eclipse.jdt.ui.lastextjar"/>
+	<item value="0" key="CallHierarchyViewPart.call_mode"/>
+	<item value="2" key="CallHierarchyViewPart.field_mode"/>
+	<item value="/Users/aitorurrutia/GitHub/POPBL6/ServerSoftware" key="org.eclipse.jdt.ui.lastextjar"/>
+	<item value="3" key="CallHierarchyViewPart.orientation"/>
+	<item value="500" key="CallHierarchyViewPart.ratio1"/>
+	<item value="1" key="SearchScopeActionGroup.search_scope_type"/>
+	<item value="500" key="CallHierarchyViewPart.ratio3"/>
+	<list key="SearchScopeActionGroup.working_set">
+	</list>
 	<section name="GenerateConstructorUsingFieldsSelectionDialog">
 		<item value="false" key="OmitCallToSuper"/>
+	</section>
+	<section name="SearchInDialog">
+		<item value="true" key="SearchInProjects"/>
+		<item value="true" key="SearchInAppLibs"/>
+		<item value="true" key="SearchInJRE"/>
+		<item value="true" key="SearchInSources"/>
 	</section>
 	<section name="org.eclipse.jdt.internal.ui.packageview.PackageExplorerPart">
 		<item value="2" key="layout"/>
@@ -44,6 +58,12 @@
 		<item value="641" key="DIALOG_HEIGHT"/>
 		<item value="588" key="DIALOG_X_ORIGIN"/>
 		<item value="56" key="DIALOG_Y_ORIGIN"/>
+	</section>
+	<section name="RefactoringWizard.preview">
+		<item value="600" key="width"/>
+		<item value="400" key="height"/>
+	</section>
+	<section name="CallHierarchySearchScope">
 	</section>
 	<section name="SourceActionDialog.methods">
 		<item value="true" key="IgnoreDefault"/>
