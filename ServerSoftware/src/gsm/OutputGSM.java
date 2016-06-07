@@ -1,19 +1,19 @@
 package gsm;
 
-import java.util.Observable;
-
 import jssc.SerialPort;
 import jssc.SerialPortEvent;
 import jssc.SerialPortEventListener;
 import jssc.SerialPortException;
 
-public class OutputGSM extends Observable implements SerialPortEventListener {
+public class OutputGSM implements SerialPortEventListener {
 
 	SerialPort serial;
+	SerialGSM serialGSM;
 	
-	public OutputGSM(SerialPort serial) {
+	public OutputGSM(SerialPort serial, SerialGSM serialGSM) {
 		super();
 		this.serial = serial;
+		this.serialGSM = serialGSM;
 		
 		try {
 			serial.openPort();
@@ -32,13 +32,18 @@ public class OutputGSM extends Observable implements SerialPortEventListener {
 
 	@Override
 	public void serialEvent(SerialPortEvent event) {
+		String receivedData;
+		
 		if (event.isRXCHAR() && event.getEventValue() > 0) {
 			try {
-				String receivedData = serial.readString();
-
-				System.out.println("Output: " + receivedData);
 				
-				this.notifyObservers(receivedData);
+				do {
+				
+				receivedData = serial.readString();
+				System.out.println("Data: " + receivedData);
+				if (receivedData == null) return;
+				} while (!receivedData.contains("+CLIP"));
+				serialGSM.call(receivedData);
 
 			} catch (SerialPortException ex) {
 				System.out.println("Error in receiving string from COM-port: " + ex);

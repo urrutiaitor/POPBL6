@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="mySQL.Trabaja"/>
-<fullyQualifiedTypeName name="mySQL.Usuario"/>
 <fullyQualifiedTypeName name="javax.swing.JDialog"/>
 <fullyQualifiedTypeName name="javax.swing.JTextField"/>
 <fullyQualifiedTypeName name="java.awt.event.ActionListener"/>
@@ -57,7 +55,9 @@
 <fullyQualifiedTypeName name="java.util.Observer"/>
 <fullyQualifiedTypeName name="jssc.SerialPort"/>
 <fullyQualifiedTypeName name="java.lang.String"/>
-<fullyQualifiedTypeName name="jssc.SerialPortEventListener"/>
 <fullyQualifiedTypeName name="main.Temperatura"/>
 <fullyQualifiedTypeName name="mysql.JDBC"/>
+<fullyQualifiedTypeName name="jssc.SerialPortEventListener"/>
+<fullyQualifiedTypeName name="java.util.concurrent.Semaphore"/>
+<fullyQualifiedTypeName name="java.util.concurrent.TimeUnit"/>
 </qualifiedTypeNameHistroy>

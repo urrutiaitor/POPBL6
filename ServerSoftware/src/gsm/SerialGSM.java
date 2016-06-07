@@ -13,7 +13,7 @@ import main.Proximidad;
 import main.Temperatura;
 import mysql.JDBC;
 
-public class SerialGSM implements Observer {
+public class SerialGSM {
 
 	SerialPort serialPortInput;
 	SerialPort serialPortOutput;
@@ -53,9 +53,7 @@ public class SerialGSM implements Observer {
 		serialPortOutput = new SerialPort(portNames[output]);
 		
 		serialInput = new InputGSM(serialPortInput);
-		serialOutput = new OutputGSM(serialPortOutput);
-		
-		serialOutput.addObserver(this);
+		serialOutput = new OutputGSM(serialPortOutput, this);
 		
 		serialInput.inicializar();
 
@@ -72,18 +70,16 @@ public class SerialGSM implements Observer {
 		return true;
 	}
 
-	@Override
-	public void update(Observable o, Object arg) {
+	public void call(String arg) {
 		JDBC jdbc = new JDBC(serverIp);
-		String data = (String) arg;
-		String numero = null; /* NEED CHANGE */
-		/*
-		 * 
-		 * LEER ENTRADA DE LLAMADA DE MOVIL
-		 * CUANDO LLEGA LA LLAMADA MIRAR EN LA BASE DE DATOS EL MOVIL
-		 * ENVIAR INFORMACION A ESE MOVIL
-		 * 
-		 */
+		String[] data;
+		String numero = null;
+		
+		//serialInput.write("at+chup");
+		
+		data = ((String) arg).split("\"");
+		numero = data[1];
+		System.out.println("NUM: " + numero);
 		
 		int habitacion = jdbc.comprobarEstancia(numero);
 		
