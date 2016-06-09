@@ -11,7 +11,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 
-import conexiones.ConnRequestServer;
 import conexiones.ConnServer;
 import main.Proximidad;
 import main.Temperatura;
@@ -23,8 +22,6 @@ public class Window extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-
-	String usuario;
 	ArrayList<Temperatura> temperaturas;
 	ArrayList<Proximidad> proximidades;
 	
@@ -32,16 +29,20 @@ public class Window extends JFrame {
 	DefaultListModel<String> listModelTemp;
 	
 	ConnServer conn;
+	String usuario;
+	String contrasena;
 	
 	
-	public Window(ConnServer connS) {
+	public Window(ConnServer connS, String usuario, String contrasena) {
 		this.setContentPane(createFrame());
 		this.setLocation(300, 200);
 		this.setSize(640, 480);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		conn = connS;
+		this.conn = connS;
+		this.usuario = usuario;
+		this.contrasena = contrasena;
 	}
 
 	private Container createFrame() {
@@ -57,7 +58,7 @@ public class Window extends JFrame {
 		listModelProx = new DefaultListModel<String>();
 		JList<String> list = new JList<String>(listModelProx);
 		
-		ArrayList<Proximidad> proxList = ConnServer.getProximidad();
+		ArrayList<Proximidad> proxList = conn.getProximidad(usuario, contrasena);
 		
 		for (int i = 0; i < proxList.size(); i++) {
 			listModelProx.addElement(proxList.get(i).toString());
@@ -72,7 +73,7 @@ public class Window extends JFrame {
 		listModelTemp = new DefaultListModel<String>();
 		JList<String> list = new JList<String>(listModelTemp);
 		
-		ArrayList<Temperatura> tempList = ConnServer.getTemperatura();
+		ArrayList<Temperatura> tempList = conn.getTemperatura(usuario, contrasena);
 		
 		for (int i = 0; i < tempList.size(); i++) {
 			listModelTemp.addElement(tempList.get(i).toString());

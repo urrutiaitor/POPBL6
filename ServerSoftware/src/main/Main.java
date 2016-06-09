@@ -3,7 +3,6 @@ package main;
 import java.util.Scanner;
 
 import cliente.ConnCliente;
-import xbee.SerialXBee;
 
 
 public class Main {
@@ -16,11 +15,6 @@ public class Main {
 		
 		ConnCliente connCliente = new ConnCliente(serverIp);
 		
-		SerialXBee xbee = new SerialXBee(serverIp);
-		
-		keyboard.nextLine();
-		
-		xbee.closeConn();
 	}
 
 }

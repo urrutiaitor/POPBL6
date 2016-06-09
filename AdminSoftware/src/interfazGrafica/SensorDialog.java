@@ -34,8 +34,10 @@ public class SensorDialog extends JDialog implements ActionListener{
 	JTextField anoT;
 	JComboBox<String> habitacionB;
 	JComboBox<String> tipoSensorB;
+	String serverIp;
 	
-	public SensorDialog () {
+	public SensorDialog (String serverIp) {
+		this.serverIp = serverIp;
 		this.setLocation(100, 100);
 		this.setSize(800, 300);
 		this.setContentPane(createPane());
@@ -56,7 +58,7 @@ public class SensorDialog extends JDialog implements ActionListener{
 	private Container createTextField () {
 		JPanel panel = new JPanel(new GridLayout(3, 1));
 		
-		JDBC jdbc = new JDBC();
+		JDBC jdbc = new JDBC(serverIp);
 		
 		ArrayList<String> nombresTipoSensor = jdbc.getNombre("tipoSensor");
 		String[] sensorS = new String[nombresTipoSensor.size()];
@@ -95,15 +97,15 @@ public class SensorDialog extends JDialog implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand() == "Anadir") {
-			JDBC jdbc = new JDBC();
+			JDBC jdbc = new JDBC(serverIp);
 			int idHabitacion = jdbc.getIdTabla("habitacion", (String) habitacionB.getSelectedItem());
 			int idTipoSensor = jdbc.getIdTabla("tipoSensor", (String) tipoSensorB.getSelectedItem());
 			@SuppressWarnings("deprecation")
 			Sensor s = new Sensor(new Date(Integer.parseInt(anoT.getText()) - 1900, Integer.parseInt(mesT.getText()),
 							Integer.parseInt(diaT.getText())),
 					idHabitacion, idTipoSensor);
-			int id = s.submit();
-			JOptionPane.showMessageDialog(this, "Se ha asignado el id: " + id);
+			int id = s.submit(serverIp);
+			this.dispose();
 		}
 	}
 }

@@ -35,8 +35,11 @@ public class Window extends JFrame implements ActionListener {
 	MyAction accUsuario, accPersonal, accTipoPersonal;
 	MyAction accHabitacion, accHospedaje, accTrabaja;
 	MyAction accSensor, accTipoSensor;
+	
+	String serverIp;
 
-	public Window () {
+	public Window (String ip) {
+		this.serverIp = ip;
 		crearAcciones();
 		this.setJMenuBar(createMenuBar());
 		this.setContentPane(createFrame());
@@ -46,21 +49,21 @@ public class Window extends JFrame implements ActionListener {
 	}
 	
 	private void crearAcciones(){
-		accUsuario = new MyAction ("Anadir usuario", new ImageIcon(""), "Anadir un usuario del hotel", KeyEvent.VK_U);
-		accPersonal = new MyAction ("Anadir personal", new ImageIcon(""), "Anadir un trabajador del hotel", KeyEvent.VK_P);
-		accTipoPersonal = new MyAction ("Anadir tipo personal", new ImageIcon(""), "Anadir un tipo de trabajador del hotel", KeyEvent.VK_W);
-		accHabitacion = new MyAction ("Anadir habitacion", new ImageIcon(""), "Anadir un habitacion en el hotel", KeyEvent.VK_H);
-		accHospedaje = new MyAction ("Anadir hospedaje", new ImageIcon(""), "Anadir una reserva de hospedaje", KeyEvent.VK_R);
-		accSensor = new MyAction ("Anadir sensor", new ImageIcon(""), "Anadir un sensor en una habitacion", KeyEvent.VK_S);
-		accTipoSensor = new MyAction ("Anadir tipo sensor", new ImageIcon(""), "Anadir un tipo de sensor", KeyEvent.VK_C);
-		accTrabaja = new MyAction ("Anadir trabaja", new ImageIcon(""), "Anadir una tarea para un trabajador", KeyEvent.VK_T);
+		accUsuario = new MyAction ("Anadir usuario", new ImageIcon(""), "Anadir un usuario del hotel", KeyEvent.VK_U, serverIp);
+		accPersonal = new MyAction ("Anadir personal", new ImageIcon(""), "Anadir un trabajador del hotel", KeyEvent.VK_P, serverIp);
+		accTipoPersonal = new MyAction ("Anadir tipo personal", new ImageIcon(""), "Anadir un tipo de trabajador del hotel", KeyEvent.VK_W, serverIp);
+		accHabitacion = new MyAction ("Anadir habitacion", new ImageIcon(""), "Anadir un habitacion en el hotel", KeyEvent.VK_H, serverIp);
+		accHospedaje = new MyAction ("Anadir hospedaje", new ImageIcon(""), "Anadir una reserva de hospedaje", KeyEvent.VK_R, serverIp);
+		accSensor = new MyAction ("Anadir sensor", new ImageIcon(""), "Anadir un sensor en una habitacion", KeyEvent.VK_S, serverIp);
+		accTipoSensor = new MyAction ("Anadir tipo sensor", new ImageIcon(""), "Anadir un tipo de sensor", KeyEvent.VK_C, serverIp);
+		accTrabaja = new MyAction ("Anadir trabaja", new ImageIcon(""), "Anadir una tarea para un trabajador", KeyEvent.VK_T, serverIp);
 	}
 
 	private Container createFrame() {
-		JSplitPane panel = new JSplitPane();
+		JPanel panel = new JPanel(new GridLayout(1, 2));
 		
-		panel.setRightComponent(sensorPanel());
-		panel.setLeftComponent(alocationPanel());
+		panel.add(sensorPanel());
+		panel.add(alocationPanel());
 		
 		return panel;
 	}
@@ -89,8 +92,7 @@ public class Window extends JFrame implements ActionListener {
 	}
 	
 	private String[] getProxHistorial() {
-		JDBC jdbc = new JDBC();
-		
+		JDBC jdbc = new JDBC(serverIp);
 		ArrayList<Proximidad> proximidad = jdbc.getProximidad();
 		String[] list = new String[proximidad.size()];
 		
@@ -102,7 +104,7 @@ public class Window extends JFrame implements ActionListener {
 	}
 
 	private String[] getTempHistorial() {
-		JDBC jdbc = new JDBC();
+		JDBC jdbc = new JDBC(serverIp);
 		
 		ArrayList<Temperatura> temperaturas = jdbc.getTemperatura();
 		String[] list = new String[temperaturas.size()];
@@ -124,7 +126,7 @@ public class Window extends JFrame implements ActionListener {
 	}
 
 	private String[] getAlojHistorial() {
-		JDBC jdbc = new JDBC();
+		JDBC jdbc = new JDBC(serverIp);
 		
 		ArrayList<Alojamiento> alojamientos = jdbc.getAlojamiento();
 		String[] list = new String[alojamientos.size()];
@@ -139,18 +141,9 @@ public class Window extends JFrame implements ActionListener {
 	private JMenuBar createMenuBar() {
 		JMenuBar bar = new JMenuBar();
 
-		bar.add(createMenuFile());
-		bar.add(createMenuAdd());
-		bar.add(Box.createHorizontalGlue());
-		bar.add(createMenuConfiguration());
+		bar.add(createMenuAdd());;
 
 		return bar;
-	}
-
-	private JMenu createMenuFile() {
-		JMenu menuFile = new JMenu("File");
-		
-		return menuFile;
 	}
 
 	private JMenu createMenuAdd() {
@@ -164,12 +157,6 @@ public class Window extends JFrame implements ActionListener {
 		menuAdd.add(accTipoSensor);
 		menuAdd.add(accTrabaja);
 		return menuAdd;
-	}
-
-	private JMenu createMenuConfiguration() {
-		JMenu menuConfiguration = new JMenu("Configuracion");
-		
-		return menuConfiguration;
 	}
 
 	@Override

@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="javax.swing.BorderFactory"/>
-<fullyQualifiedTypeName name="java.awt.Color"/>
-<fullyQualifiedTypeName name="javax.swing.JComboBox"/>
-<fullyQualifiedTypeName name="interfazGrafica.Window"/>
-<fullyQualifiedTypeName name="javax.swing.ImageIcon"/>
-<fullyQualifiedTypeName name="java.awt.event.KeyEvent"/>
-<fullyQualifiedTypeName name="java.awt.BorderLayout"/>
 <fullyQualifiedTypeName name="mySQL.Habitacion"/>
 <fullyQualifiedTypeName name="mySQL.Hospeda"/>
 <fullyQualifiedTypeName name="mySQL.Personal"/>
@@ -14,18 +7,11 @@
 <fullyQualifiedTypeName name="mySQL.TipoPersonal"/>
 <fullyQualifiedTypeName name="mySQL.Trabaja"/>
 <fullyQualifiedTypeName name="mySQL.Usuario"/>
-<fullyQualifiedTypeName name="javax.swing.JDialog"/>
-<fullyQualifiedTypeName name="javax.swing.JTextField"/>
-<fullyQualifiedTypeName name="java.awt.event.ActionListener"/>
-<fullyQualifiedTypeName name="javax.swing.JButton"/>
 <fullyQualifiedTypeName name="javax.swing.JPasswordField"/>
 <fullyQualifiedTypeName name="interfazGrafica.DialogoInicio"/>
-<fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
 <fullyQualifiedTypeName name="javax.swing.DefaultListModel"/>
 <fullyQualifiedTypeName name="conexiones.ConnRequestServer"/>
-<fullyQualifiedTypeName name="conexiones.ConnServer"/>
 <fullyQualifiedTypeName name="interfazGrafica.Temperatura"/>
-<fullyQualifiedTypeName name="javax.swing.JPanel"/>
 <fullyQualifiedTypeName name="java.lang.Object"/>
 <fullyQualifiedTypeName name="java.util.Scanner"/>
 <fullyQualifiedTypeName name="jssc.SerialPortList"/>
@@ -44,7 +30,6 @@
 <fullyQualifiedTypeName name="javax.swing.JSplitPane"/>
 <fullyQualifiedTypeName name="javax.swing.JScrollPane"/>
 <fullyQualifiedTypeName name="javax.swing.JList"/>
-<fullyQualifiedTypeName name="java.awt.GridLayout"/>
 <fullyQualifiedTypeName name="main.Alojamiento"/>
 <fullyQualifiedTypeName name="Medicion"/>
 <fullyQualifiedTypeName name="java.util.Date"/>
@@ -53,10 +38,26 @@
 <fullyQualifiedTypeName name="javax.sound.sampled.Clip"/>
 <fullyQualifiedTypeName name="java.lang.Thread"/>
 <fullyQualifiedTypeName name="jssc.SerialPortEventListener"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="java.util.ListIterator"/>
-<fullyQualifiedTypeName name="main.Proximidad"/>
 <fullyQualifiedTypeName name="mySQL.JDBC"/>
-<fullyQualifiedTypeName name="java.sql.Date"/>
+<fullyQualifiedTypeName name="utils.HistorialHolder"/>
+<fullyQualifiedTypeName name="utils.GetHistorialPrx"/>
+<fullyQualifiedTypeName name="utils.GetHistorialPrxHelper"/>
+<fullyQualifiedTypeName name="utils._GetHistorialDisp"/>
+<fullyQualifiedTypeName name="mysql.JDBC"/>
 <fullyQualifiedTypeName name="main.Temperatura"/>
+<fullyQualifiedTypeName name="conexiones.ConnServer"/>
+<fullyQualifiedTypeName name="utils.StringVectorHolder"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="main.Proximidad"/>
+<fullyQualifiedTypeName name="java.sql.Date"/>
+<fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
+<fullyQualifiedTypeName name="javax.swing.JDialog"/>
+<fullyQualifiedTypeName name="javax.swing.JPanel"/>
+<fullyQualifiedTypeName name="javax.swing.JTextField"/>
+<fullyQualifiedTypeName name="javax.swing.JButton"/>
+<fullyQualifiedTypeName name="java.awt.event.ActionListener"/>
+<fullyQualifiedTypeName name="interfazGrafica.Window"/>
+<fullyQualifiedTypeName name="interfazGrafica.ServerInitDialog"/>
+<fullyQualifiedTypeName name="java.awt.GridLayout"/>
 </qualifiedTypeNameHistroy>

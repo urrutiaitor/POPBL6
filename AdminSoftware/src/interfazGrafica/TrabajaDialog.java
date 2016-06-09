@@ -38,8 +38,10 @@ public class TrabajaDialog extends JDialog implements ActionListener{
 	JTextField anoFinalT;
 	JComboBox<String> hotelB;
 	JComboBox<String> personaB;
+	String serverIp;
 	
-	public TrabajaDialog () {
+	public TrabajaDialog (String serverIp) {
+		this.serverIp = serverIp;
 		this.setLocation(100, 100);
 		this.setSize(800, 400);
 		this.setContentPane(createPane());
@@ -60,7 +62,7 @@ public class TrabajaDialog extends JDialog implements ActionListener{
 	private Container createTextField () {
 		JPanel panel = new JPanel(new GridLayout(4, 1));
 		
-		JDBC jdbc = new JDBC();
+		JDBC jdbc = new JDBC(serverIp);
 		ArrayList<String> nombresHotel = jdbc.getNombre("hotel");
 		String[] hotelS = new String[nombresHotel.size()];
 		for (int i = 0 ; i < nombresHotel.size(); i++) {
@@ -110,7 +112,7 @@ public class TrabajaDialog extends JDialog implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand() == "Anadir") {
-			JDBC jdbc = new JDBC();
+			JDBC jdbc = new JDBC(serverIp);
 			int idHotel = jdbc.getIdTabla("hotel", (String) hotelB.getSelectedItem());
 			int idPersona = jdbc.getIdTabla("persona", (String) personaB.getSelectedItem());
 			@SuppressWarnings("deprecation")
@@ -119,7 +121,7 @@ public class TrabajaDialog extends JDialog implements ActionListener{
 							Integer.parseInt(diaInicioT.getText())),
 					new Date(Integer.parseInt(anoFinalT.getText()) - 1900, Integer.parseInt(mesFinalT.getText()),
 							Integer.parseInt(diaFinalT.getText())));
-			if (t.submit()) JOptionPane.showMessageDialog(this, "Se ha anadido correctamente");
+			if (t.submit(serverIp)) this.dispose();
 		}
 	}
 }

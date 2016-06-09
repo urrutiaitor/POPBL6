@@ -29,14 +29,16 @@ public class TipoPersonalDialog extends JDialog implements ActionListener {
 	
 	JTextField nombreT;
 	JTextField descripcionT;
+	String serverIp;
 	
-	public TipoPersonalDialog () {
+	public TipoPersonalDialog (String serverIp) {
+		this.serverIp = serverIp;
 		this.setLocation(100, 100);
 		this.setSize(280, 280);
 		this.setContentPane(createPane());
 		this.setVisible(true);
 		this.setModal(false);
-		
+
 	}
 	
 	private Container createPane() {
@@ -68,8 +70,8 @@ public class TipoPersonalDialog extends JDialog implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand() == "Anadir") {
 			TipoPersonal t = new TipoPersonal(nombreT.getText(), descripcionT.getText());
-			int id = t.submit();
-			JOptionPane.showMessageDialog(this, "Se ha asignado el id: " + id);
+			int id = t.submit(serverIp);
+			this.dispose();
 		}
 	}
 	

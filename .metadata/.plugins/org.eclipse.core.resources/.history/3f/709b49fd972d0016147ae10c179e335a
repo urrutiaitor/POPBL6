@@ -1,0 +1,20 @@
+package cliente;
+
+import Ice.Current;
+import utils.StringVectorHolder;
+
+public class ConsultorI extends utils._GetHistorialDisp {
+
+	@Override
+	public void getProx(int usuarioId, StringVectorHolder vector, Current __current) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void getTemp(int usuarioId, StringVectorHolder vector, Current __current) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

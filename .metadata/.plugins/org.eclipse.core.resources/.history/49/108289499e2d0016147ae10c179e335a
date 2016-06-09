@@ -1,0 +1,71 @@
+package conexiones;
+
+import java.sql.Date;
+import java.util.ArrayList;
+
+import main.Proximidad;
+import main.Temperatura;
+import utils.StringVectorHolder;
+
+public class ConnServer {
+
+	Ice.Communicator ic = null;
+	utils.StringVectorHolder vectorHolder = new utils.StringVectorHolder();
+	static utils.GetHistorialPrx theConsultor;
+	
+	public ConnServer() {
+		
+		try {
+			ic = Ice.Util.initialize();
+			Ice.ObjectPrx base = ic.stringToProxy("TheVectorManipulator:default -p 10000");
+			theConsultor = utils.GetHistorialPrxHelper.checkedCast(base);
+			if (theConsultor == null)
+				throw new Error("Invalid proxy");
+			
+			ic.destroy();
+		} catch (Exception e) {
+			System.out.println("ERROR : " + e);
+			e.printStackTrace(System.out);
+		}
+	}
+
+	public static ArrayList<Proximidad> getProximidad(String usuario, String contrasena) {
+		StringVectorHolder vector = new StringVectorHolder();
+		theConsultor.getProx(usuario, contrasena, vector);
+		ArrayList<Proximidad> proxList = new ArrayList<Proximidad>();
+		
+		/*
+		 * Date date = data[0];
+		 * String situacion = data[1];
+		 * int habitacion = data[2];
+		 */
+		
+		for (int i = 0; i < vector.value.length; i++) {
+			String data[] = vector.value[i].split("%");
+			
+			Date date = new Date(Long.parseLong(data[0]));
+			String situacion = data[1];
+			int habitacion = Integer.parseInt(data[2]);
+			
+			
+			Date tiempo;
+			String situacion;
+			Proximidad p = new Proximidad(tiempo, situacion);
+		}
+		
+	}
+
+	public static ArrayList<Temperatura> getTemperatura(String usuario, String contrasena) {
+		// TODO Auto-generated method stub
+		return new ArrayList<Temperatura>();
+	}
+	
+	public boolean comprobarUsuario (String usuario, String contrasena) {
+		
+	}
+
+	public void close () {
+		ic.destroy();
+	}
+	
+}

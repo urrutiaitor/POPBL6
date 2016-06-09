@@ -36,8 +36,10 @@ public class HospedajeDialog extends JDialog implements ActionListener {
 	JTextField diaFinalT;
 	JComboBox<String> usuarioB;
 	JComboBox<String> habitacionB;
+	String serverIp;
 	
-	public HospedajeDialog () {
+	public HospedajeDialog (String serverIp) {
+		this.serverIp = serverIp;
 		this.setLocation(100, 100);
 		this.setSize(800, 400);
 		this.setContentPane(createPane());
@@ -58,7 +60,7 @@ public class HospedajeDialog extends JDialog implements ActionListener {
 	private Container createTextField () {
 		JPanel panel = new JPanel(new GridLayout(4, 1));
 		
-		JDBC jdbc = new JDBC();
+		JDBC jdbc = new JDBC(serverIp);
 		ArrayList<String> nombresUsuario = jdbc.getNombre("usuario");
 		String[] usuarioS = new String[nombresUsuario.size()];
 		for (int i = 0 ; i < nombresUsuario.size(); i++) {
@@ -108,7 +110,7 @@ public class HospedajeDialog extends JDialog implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand() == "Anadir") {
-			JDBC jdbc = new JDBC();
+			JDBC jdbc = new JDBC(serverIp);
 			int idUsuario = jdbc.getIdTabla("usuario", (String) usuarioB.getSelectedItem());
 			int idHabitacion = jdbc.getIdTabla("habitacion", (String) habitacionB.getSelectedItem());
 			@SuppressWarnings("deprecation")
@@ -117,7 +119,7 @@ public class HospedajeDialog extends JDialog implements ActionListener {
 							Integer.parseInt(diaInicioT.getText())),
 					new Date(Integer.parseInt(anoFinalT.getText()) - 1900, Integer.parseInt(mesFinalT.getText()),
 							Integer.parseInt(diaFinalT.getText())));
-			if (h.submit()) JOptionPane.showMessageDialog(this, "Se ha anadido correctamente");
+			if (h.submit(serverIp)) this.dispose();
 		}
 	}
 }

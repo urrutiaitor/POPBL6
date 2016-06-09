@@ -23,12 +23,12 @@ public class Hotel {
 		this.web = web;
 	}
 	
-	public int submit() {
-		JDBC dbConnection = new JDBC();
+	public int submit(String serverIp) {
+		JDBC dbConnection = new JDBC(serverIp);
 
 		String sql = "INSERT INTO hotel (nombre, descripcion, estrellas, direccion, localidad, pais, web) "
-				+ "VALUES ('" + nombre + "', '" + descripcion + "', '" + estrellas + "', '"
-				+ direccion + "', '"+ localidad + "', '" + pais + "', '" + web + "');";
+				+ "VALUES (\"" + nombre + "\", \"" + descripcion + "\", \"" + estrellas + "\", \""
+				+ direccion + "\", \""+ localidad + "\", \"" + pais + "\", \"" + web + "\");";
 
 		System.out.println(sql);
 		hotelId = dbConnection.ejecutarUpdate(sql);

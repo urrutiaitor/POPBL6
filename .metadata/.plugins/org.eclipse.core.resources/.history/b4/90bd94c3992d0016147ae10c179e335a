@@ -1,0 +1,48 @@
+package cliente;
+
+import java.util.ArrayList;
+import java.util.ListIterator;
+
+import Ice.Current;
+import main.Proximidad;
+import mysql.JDBC;
+import utils.StringVectorHolder;
+
+public class ConsultorI extends utils._GetHistorialDisp {
+
+	JDBC jdbc;
+	
+	public ConsultorI(String serverIp) {
+		jdbc = new JDBC(serverIp);
+	}
+
+	@Override
+	public void getProx(int usuarioId, StringVectorHolder vector, Current __current) {
+
+		
+		ArrayList<Proximidad> proximidad = jdbc.getProximidad();
+		ListIterator<Proximidad> proximidadIt = proximidad.listIterator();
+
+		while (proximidadIt.hasNext()) {
+			Proximidad p = proximidadIt.next();
+
+			if (p.getHabitacion() != habitacion) {
+				proximidadIt.remove();
+			} else {
+				if (p.getTiempo().after(fin)) {
+					proximidadIt.remove();
+				} else {
+					if (p.getTiempo().before(inicio))
+						proximidadIt.remove();
+				}
+			}
+		}
+	}
+
+	@Override
+	public void getTemp(int usuarioId, StringVectorHolder vector, Current __current) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

@@ -40,8 +40,10 @@ public class PersonalDialog extends JDialog implements ActionListener {
 	JPasswordField contrasenaT;
 	JTextField DNIT;
 	JComboBox<String> tipoPersonalB;
+	String serverIp;
 	
-	public PersonalDialog () {
+	public PersonalDialog (String serverIp) {
+		this.serverIp = serverIp;
 		this.setLocation(100, 100);
 		this.setSize(900, 600);
 		this.setContentPane(createPane());
@@ -62,7 +64,7 @@ public class PersonalDialog extends JDialog implements ActionListener {
 	private Container createTextField () {
 		JPanel panel = new JPanel(new GridLayout(8, 1));
 		
-		JDBC jdbc = new JDBC();
+		JDBC jdbc = new JDBC(serverIp);
 		ArrayList<String> nombres = jdbc.getNombre("tipoPersonal");
 		String[] tipoPersonalS = new String[nombres.size()];
 		for (int i = 0 ; i < nombres.size(); i++) {
@@ -120,7 +122,7 @@ public class PersonalDialog extends JDialog implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand() == "Anadir") {
-			JDBC jdbc = new JDBC();
+			JDBC jdbc = new JDBC(serverIp);
 			int idTipoPersonal = jdbc.getIdTabla("tipoPersonal", (String) tipoPersonalB.getSelectedItem());
 			@SuppressWarnings("deprecation")
 			Personal p = new Personal(nombreT.getText(), apellidoT.getText(),
@@ -128,8 +130,8 @@ public class PersonalDialog extends JDialog implements ActionListener {
 							Integer.parseInt(diaT.getText())),
 					localidadT.getText(), paisT.getText(), contrasenaT.getText().hashCode(),
 					DNIT.getText(), idTipoPersonal);
-			int id = p.submit();
-			JOptionPane.showMessageDialog(this, "Se ha asignado el id: " + id);
+			int id = p.submit(serverIp);
+			this.dispose();
 		}
 	}
 }

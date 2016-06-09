@@ -14,7 +14,6 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import conexiones.ConnRequestServer;
 import conexiones.ConnServer;
 
 public class DialogoInicio extends JDialog implements ActionListener {
@@ -29,12 +28,16 @@ public class DialogoInicio extends JDialog implements ActionListener {
 	JPasswordField contrasena;
 	JButton boton;
 	
+	ConnServer connServer;
+	
 	public DialogoInicio () {
 		this.setLocation(100, 100);
 		this.setSize(300, 200);
 		this.setContentPane(createPane());
 		this.setVisible(true);
 		this.setModal(false);
+		
+		connServer = new ConnServer();
 	}
 
 	private Container createPane() {
@@ -62,11 +65,10 @@ public class DialogoInicio extends JDialog implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand() == "Entrar") {
-			ConnRequestServer cs = new ConnRequestServer(usuario.getText(), contrasena.getText().hashCode());
-			ConnServer connS;
-			if ((connS = cs.acceder()) != null) {
+			ConnServer connS = new ConnServer();
+			if (connServer.comprobarUsuario(usuario.getText(), contrasena.getText().hashCode() + "")) {
 				this.dispose();
-				Window window = new Window (connS);
+				Window window = new Window (connS, usuario.getText(), contrasena.getText().hashCode() + "");
 			} else {
 				JOptionPane.showMessageDialog(this, "El usuario o contrasena no son correctos", "Acceso fallido", JOptionPane.ERROR_MESSAGE);
 				usuario.setText("");

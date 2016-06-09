@@ -32,13 +32,15 @@ public class HabitacionDialog extends JDialog implements ActionListener {
 	JTextField tamanoT;
 	JTextField pisoT;
 	JComboBox<String> hotelB;
+	String serverIp;
 	
-	public HabitacionDialog () {
+	public HabitacionDialog (String serverIp) {
+		this.serverIp = serverIp;
 		this.setLocation(100, 100);
 		this.setSize(800, 400);
 		this.setContentPane(createPane());
 		this.setVisible(true);
-		this.setModal(false);
+		this.setModal(false);	
 		
 	}
 	
@@ -54,7 +56,7 @@ public class HabitacionDialog extends JDialog implements ActionListener {
 	private Container createTextField () {
 		JPanel panel = new JPanel(new GridLayout(5, 1));
 		
-		JDBC jdbc = new JDBC();
+		JDBC jdbc = new JDBC(serverIp);
 		ArrayList<String> nombres = jdbc.getNombre("hotel");
 		String[] hotelS = new String[nombres.size()];
 		for (int i = 0 ; i < nombres.size(); i++) {
@@ -91,12 +93,12 @@ public class HabitacionDialog extends JDialog implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand() == "Anadir") {
-			JDBC jdbc = new JDBC();
+			JDBC jdbc = new JDBC(serverIp);
 			int id = jdbc.getIdTabla("hotel", (String) hotelB.getSelectedItem());
 			Habitacion h = new Habitacion(nombreT.getText(), descripcionT.getText(),
 					Integer.parseInt(tamanoT.getText()), Integer.parseInt(pisoT.getText()), id);
-			id = h.submit();
-			JOptionPane.showMessageDialog(this, "Se ha asignado la Id: " + id);
+			id = h.submit(serverIp);
+			this.dispose();
 		}
 		
 	}

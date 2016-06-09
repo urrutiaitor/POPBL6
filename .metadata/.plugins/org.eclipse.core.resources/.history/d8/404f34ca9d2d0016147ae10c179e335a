@@ -1,0 +1,48 @@
+package conexiones;
+
+import java.util.ArrayList;
+
+import main.Proximidad;
+import main.Temperatura;
+
+public class ConnServer {
+
+	Ice.Communicator ic = null;
+	utils.StringVectorHolder vectorHolder = new utils.StringVectorHolder();
+	static utils.GetHistorialPrx theConsultor;
+	
+	public ConnServer() {
+		
+		try {
+			ic = Ice.Util.initialize();
+			Ice.ObjectPrx base = ic.stringToProxy("TheVectorManipulator:default -p 10000");
+			theConsultor = utils.GetHistorialPrxHelper.checkedCast(base);
+			if (theConsultor == null)
+				throw new Error("Invalid proxy");
+			
+			ic.destroy();
+		} catch (Exception e) {
+			System.out.println("ERROR : " + e);
+			e.printStackTrace(System.out);
+		}
+	}
+
+	public static ArrayList<Proximidad> getProximidad(String usuario, String contrasena) {
+		// TODO Auto-generated method stub
+		return new ArrayList<Proximidad>();
+	}
+
+	public static ArrayList<Temperatura> getTemperatura(String usuario, String contrasena) {
+		// TODO Auto-generated method stub
+		return new ArrayList<Temperatura>();
+	}
+	
+	public boolean comprobarUsuario (String usuario, String contrasena) {
+		
+	}
+
+	public void close () {
+		ic.destroy();
+	}
+	
+}

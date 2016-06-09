@@ -18,12 +18,12 @@ public class Habitacion {
 		this.hotelId = hotelId;
 	}
 	
-	public int submit() {
-		JDBC dbConnection = new JDBC();
+	public int submit(String serverIp) {
+		JDBC dbConnection = new JDBC(serverIp);
 
 		String sql = "INSERT INTO habitacion (nombre, descripcion, tamano, piso, hotelId) "
-				+ "VALUES ('" + nombre + "', '" + descripcion + "', '" + tamano + "', '"
-				+ piso + "', '"+ hotelId + "');";
+				+ "VALUES (\"" + nombre + "\", \"" + descripcion + "\", \"" + tamano + "\", \""
+				+ piso + "\", \""+ hotelId + "\");";
 
 		System.out.println(sql);
 		habitacionId = dbConnection.ejecutarUpdate(sql);

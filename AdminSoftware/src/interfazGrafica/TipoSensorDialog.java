@@ -26,8 +26,10 @@ public class TipoSensorDialog extends JDialog implements ActionListener {
 	
 	JTextField nombreT;
 	JTextField descripcionT;
+	String serverIp;
 	
-	public TipoSensorDialog () {
+	public TipoSensorDialog (String serverIp) {
+		this.serverIp = serverIp;
 		this.setLocation(100, 100);
 		this.setSize(280, 280);
 		this.setContentPane(createPane());
@@ -65,8 +67,8 @@ public class TipoSensorDialog extends JDialog implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand() == "Anadir") {
 			TipoSensor t = new TipoSensor(nombreT.getText(), descripcionT.getText());
-			int id = t.submit();
-			JOptionPane.showMessageDialog(this, "Se ha asignado el id: " + id);
+			int id = t.submit(serverIp);
+			this.dispose();
 		}
 	}
 	

@@ -12,11 +12,11 @@ public class TipoSensor {
 		this.descripcion = descripcion;
 	}
 	
-	public int submit() {
-		JDBC dbConnection = new JDBC();
+	public int submit(String serverIp) {
+		JDBC dbConnection = new JDBC(serverIp);
 
 		String sql = "INSERT INTO tiposensor (nombre, descripcion) "
-				+ "VALUES ('" + nombre + "', '" + descripcion + "');";
+				+ "VALUES (\"" + nombre + "\", \"" + descripcion + "\");";
 
 		System.out.println(sql);
 		tipoSensorId = dbConnection.ejecutarUpdate(sql);

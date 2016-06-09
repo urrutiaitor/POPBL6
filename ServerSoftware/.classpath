@@ -10,5 +10,6 @@
 	<classpathentry kind="lib" path="/Users/aitorurrutia/GitHub/POPBL6/ServerSoftware/slf4j-nop-1.7.12.jar"/>
 	<classpathentry kind="lib" path="/Users/aitorurrutia/GitHub/POPBL6/ServerSoftware/slf4j-simple-1.7.12.jar"/>
 	<classpathentry kind="lib" path="/Users/aitorurrutia/GitHub/POPBL6/ServerSoftware/xbjlib-1.1.1.jar"/>
+	<classpathentry kind="lib" path="/Users/aitorurrutia/GitHub/POPBL6/ServerSoftware/ice-3.6.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

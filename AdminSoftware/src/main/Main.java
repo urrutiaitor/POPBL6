@@ -1,11 +1,13 @@
 package main;
 
-import interfazGrafica.Window;
+import interfazGrafica.ServerInitDialog;
 
 public class Main {
 
 	public static void main(String[] args) {
-		Window window = new Window();
+		
+		
+		ServerInitDialog sid = new ServerInitDialog();
 	}
 
 }

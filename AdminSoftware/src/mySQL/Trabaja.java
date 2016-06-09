@@ -17,12 +17,12 @@ public class Trabaja {
 		this.fin = fin;
 	}
 	
-	public boolean submit() {
-		JDBC dbConnection = new JDBC();
+	public boolean submit(String serverIp) {
+		JDBC dbConnection = new JDBC(serverIp);
 
 		String sql = "INSERT INTO trabaja (hotelId, personalId, inicio, final) "
-				+ "VALUES ('" + hotelId + "', '" + personalId + "', '"
-				+ inicio.toString() + "', '" + fin.toString() + "');";
+				+ "VALUES (\"" + hotelId + "\", \"" + personalId + "\", \""
+				+ inicio.toString() + "\", \"" + fin.toString() + "\");";
 
 		System.out.println(sql);
 		int num = dbConnection.ejecutarUpdate(sql);

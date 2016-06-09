@@ -17,7 +17,7 @@ import java.sql.Statement;
 public class JDBC {
 	final String db = "hoteldb";
 	String ip = "127.0.0.1";
-	final String dbmsurl = "jdbc:mysql://" + ip + ":3306/" + db;
+	String dbmsurl = "jdbc:mysql://" + ip + ":3306/" + db;
 
 	String userName;
 	String password;
@@ -29,16 +29,12 @@ public class JDBC {
 		this.userName = username;
 		this.password = password;
 	}
-
-	public JDBC() {
-		userName = "hotelroot";
-		password = "hotelroot";
-	}
 	
 	public JDBC(String serverIp) {
 		this.ip = serverIp;
 		userName = "hotelroot";
 		password = "hotelroot";
+		dbmsurl = "jdbc:mysql://" + ip + ":3306/" + db;
 	}
 
 	public ResultSet getStatements() {
@@ -138,7 +134,7 @@ public class JDBC {
 
 		String sql = "SELECT medicion.fecha, medicion.unidad, sensor.habitacionId " + "FROM medicion, sensor, tipoSensor "
 				+ "WHERE medicion.sensorId = sensor.sensorId " + "AND sensor.tipoSensorId = tipoSensor.tipoSensorId "
-				+ "AND tipoSensor.nombre = \"Sensor proximidad\";";
+				+ "AND tipoSensor.nombre = \"Sensor presencia\";";
 
 		try {
 			conn = getConnection();

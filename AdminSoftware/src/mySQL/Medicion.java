@@ -18,13 +18,13 @@ public class Medicion {
 		this.sensorId = sensorId;
 	}
 	
-	public int submit() {
-		JDBC dbConnection = new JDBC();
+	public int submit(String serverIp) {
+		JDBC dbConnection = new JDBC(serverIp);
 
 		@SuppressWarnings("deprecation")
 		String sql = "INSERT INTO medicion (fecha, valor, unidad, sensorId) "
-				+ "VALUES ('" + fecha.toString() + " " + fecha.getHours() + ":" + fecha.getMinutes() + ":" + fecha.getSeconds()
-				+ "', '" + valor + "', '" + unidad + "', '" + sensorId + "');";
+				+ "VALUES (\"" + fecha.toString() + " " + fecha.getHours() + ":" + fecha.getMinutes() + ":" + fecha.getSeconds()
+				+ "\", \"" + valor + "\", \"" + unidad + "\", \"" + sensorId + "\");";
 
 		System.out.println(sql);
 		medicionId = dbConnection.ejecutarUpdate(sql);

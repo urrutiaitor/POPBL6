@@ -27,13 +27,13 @@ public class Personal {
 		this.tipoPersonalId = tipoPersonalId;
 	}
 	
-	public int submit() {
-		JDBC dbConnection = new JDBC();
+	public int submit(String serverIp) {
+		JDBC dbConnection = new JDBC(serverIp);
 
 		String sql = "INSERT INTO personal (nombre, apellido, fechaNacimiento, localidad, pais, contrasena, DNI, tipoPersonalId) "
-				+ "VALUES ('" + nombre + "', '" + apellido + "', '" + fechaNacimiento.toString() + "', '"
-				+ localidad + "', '"+ pais + "', '" + contrasena + "', '" + DNI + "', '"
-				+ tipoPersonalId + "');";
+				+ "VALUES (\"" + nombre + "\", \"" + apellido + "\", \"" + fechaNacimiento.toString() + "\", \""
+				+ localidad + "\", \""+ pais + "\", \"" + contrasena + "\", \"" + DNI + "\", \""
+				+ tipoPersonalId + "\");";
 
 		System.out.println(sql);
 		personalId = dbConnection.ejecutarUpdate(sql);
