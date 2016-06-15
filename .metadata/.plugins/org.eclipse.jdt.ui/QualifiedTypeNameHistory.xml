@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="mySQL.Habitacion"/>
 <fullyQualifiedTypeName name="mySQL.Hospeda"/>
 <fullyQualifiedTypeName name="mySQL.Personal"/>
 <fullyQualifiedTypeName name="mySQL.Sensor"/>
@@ -8,7 +7,6 @@
 <fullyQualifiedTypeName name="mySQL.Trabaja"/>
 <fullyQualifiedTypeName name="mySQL.Usuario"/>
 <fullyQualifiedTypeName name="javax.swing.JPasswordField"/>
-<fullyQualifiedTypeName name="interfazGrafica.DialogoInicio"/>
 <fullyQualifiedTypeName name="javax.swing.DefaultListModel"/>
 <fullyQualifiedTypeName name="conexiones.ConnRequestServer"/>
 <fullyQualifiedTypeName name="interfazGrafica.Temperatura"/>
@@ -22,7 +20,6 @@
 <fullyQualifiedTypeName name="jssc.SerialPortEvent"/>
 <fullyQualifiedTypeName name="jssc.SerialPort"/>
 <fullyQualifiedTypeName name="java.io.File"/>
-<fullyQualifiedTypeName name="java.lang.Double"/>
 <fullyQualifiedTypeName name="java.lang.Integer"/>
 <fullyQualifiedTypeName name="mySQL.TipoSensor"/>
 <fullyQualifiedTypeName name="java.sql.Connection"/>
@@ -30,7 +27,6 @@
 <fullyQualifiedTypeName name="javax.swing.JSplitPane"/>
 <fullyQualifiedTypeName name="javax.swing.JScrollPane"/>
 <fullyQualifiedTypeName name="javax.swing.JList"/>
-<fullyQualifiedTypeName name="main.Alojamiento"/>
 <fullyQualifiedTypeName name="Medicion"/>
 <fullyQualifiedTypeName name="java.util.Date"/>
 <fullyQualifiedTypeName name="javax.sound.sampled.AudioInputStream"/>
@@ -46,8 +42,6 @@
 <fullyQualifiedTypeName name="utils._GetHistorialDisp"/>
 <fullyQualifiedTypeName name="mysql.JDBC"/>
 <fullyQualifiedTypeName name="main.Temperatura"/>
-<fullyQualifiedTypeName name="conexiones.ConnServer"/>
-<fullyQualifiedTypeName name="utils.StringVectorHolder"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="main.Proximidad"/>
 <fullyQualifiedTypeName name="java.sql.Date"/>
@@ -58,6 +52,12 @@
 <fullyQualifiedTypeName name="javax.swing.JButton"/>
 <fullyQualifiedTypeName name="java.awt.event.ActionListener"/>
 <fullyQualifiedTypeName name="interfazGrafica.Window"/>
-<fullyQualifiedTypeName name="interfazGrafica.ServerInitDialog"/>
 <fullyQualifiedTypeName name="java.awt.GridLayout"/>
+<fullyQualifiedTypeName name="gsm.SerialGSM"/>
+<fullyQualifiedTypeName name="conexiones.ConnServer"/>
+<fullyQualifiedTypeName name="main.Alojamiento"/>
+<fullyQualifiedTypeName name="utils.StringVectorHolder"/>
+<fullyQualifiedTypeName name="interfazGrafica.ServerInitDialog"/>
+<fullyQualifiedTypeName name="interfazGrafica.DialogoInicio"/>
+<fullyQualifiedTypeName name="java.lang.Double"/>
 </qualifiedTypeNameHistroy>

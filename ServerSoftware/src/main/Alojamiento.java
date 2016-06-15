@@ -33,6 +33,22 @@ public class Alojamiento {
 		this.fin = fin;
 	}
 
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public String getHabitacion() {
+		return habitacion;
+	}
+
+	public Date getInicio() {
+		return inicio;
+	}
+
+	public Date getFin() {
+		return fin;
+	}
+
 	@Override
 	public String toString() {
 		return "Alojamiento [usuario=" + usuario + ", habitacion=" + habitacion + ", inicio=" + inicio + ", fin=" + fin

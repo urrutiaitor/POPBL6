@@ -50,7 +50,8 @@ public class Temperatura {
 
 	@Override
 	public String toString() {
-		return "Temperatura [valor=" + valor + ", tiempo=" + tiempo + ", situacion=" + situacion + "]";
+		return "Temperatura -> valor=" + String.valueOf(valor) + ", tiempo=" + tiempo + ", habitacion="
+				+ String.valueOf(habitacion);
 	}
 	
 }

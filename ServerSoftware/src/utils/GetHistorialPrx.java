@@ -64,9 +64,9 @@ public interface GetHistorialPrx extends Ice.ObjectPrx
 
     public boolean end_comprobarUsuario(Ice.AsyncResult __result);
 
-    public void getProx(String usuario, String contrasena, StringVectorHolder vector);
+    public String[] getProx(String usuario, String contrasena);
 
-    public void getProx(String usuario, String contrasena, StringVectorHolder vector, java.util.Map<String, String> __ctx);
+    public String[] getProx(String usuario, String contrasena, java.util.Map<String, String> __ctx);
 
     public Ice.AsyncResult begin_getProx(String usuario, String contrasena);
 
@@ -104,11 +104,11 @@ public interface GetHistorialPrx extends Ice.ObjectPrx
                                          IceInternal.Functional_GenericCallback1<Ice.Exception> __exceptionCb, 
                                          IceInternal.Functional_BoolCallback __sentCb);
 
-    public void end_getProx(StringVectorHolder vector, Ice.AsyncResult __result);
+    public String[] end_getProx(Ice.AsyncResult __result);
 
-    public void getTemp(String usuario, String contrasena, StringVectorHolder vector);
+    public String[] getTemp(String usuario, String contrasena);
 
-    public void getTemp(String usuario, String contrasena, StringVectorHolder vector, java.util.Map<String, String> __ctx);
+    public String[] getTemp(String usuario, String contrasena, java.util.Map<String, String> __ctx);
 
     public Ice.AsyncResult begin_getTemp(String usuario, String contrasena);
 
@@ -146,5 +146,5 @@ public interface GetHistorialPrx extends Ice.ObjectPrx
                                          IceInternal.Functional_GenericCallback1<Ice.Exception> __exceptionCb, 
                                          IceInternal.Functional_BoolCallback __sentCb);
 
-    public void end_getTemp(StringVectorHolder vector, Ice.AsyncResult __result);
+    public String[] end_getTemp(Ice.AsyncResult __result);
 }

@@ -1,0 +1,14 @@
+package main;
+
+import javax.swing.JOptionPane;
+
+import interfazGrafica.DialogoInicio;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Dialogo
+		DialogoInicio di = new DialogoInicio();
+	}
+
+}

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;ServerInitDialog.java&apos; to &apos;ClientSoftware/src/interfazGrafica&apos;&#x0A;- Original project: &apos;AdminSoftware&apos;&#x0A;- Destination element: &apos;ClientSoftware/src/interfazGrafica&apos;&#x0A;- Original element: &apos;interfazGrafica.ServerInitDialog.java&apos;" description="Copy compilation unit" destination="=ClientSoftware/src&lt;interfazGrafica" element1="/src&lt;interfazGrafica{ServerInitDialog.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1465573768821" units="1" version="1.0"/>
+</session>

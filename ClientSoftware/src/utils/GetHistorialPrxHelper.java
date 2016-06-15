@@ -204,20 +204,20 @@ public final class GetHistorialPrxHelper extends Ice.ObjectPrxHelperBase impleme
 
     private static final String __getProx_name = "getProx";
 
-    public void getProx(String usuario, String contrasena, StringVectorHolder vector)
+    public String[] getProx(String usuario, String contrasena)
     {
-        getProx(usuario, contrasena, vector, null, false);
+        return getProx(usuario, contrasena, null, false);
     }
 
-    public void getProx(String usuario, String contrasena, StringVectorHolder vector, java.util.Map<String, String> __ctx)
+    public String[] getProx(String usuario, String contrasena, java.util.Map<String, String> __ctx)
     {
-        getProx(usuario, contrasena, vector, __ctx, true);
+        return getProx(usuario, contrasena, __ctx, true);
     }
 
-    private void getProx(String usuario, String contrasena, StringVectorHolder vector, java.util.Map<String, String> __ctx, boolean __explicitCtx)
+    private String[] getProx(String usuario, String contrasena, java.util.Map<String, String> __ctx, boolean __explicitCtx)
     {
         __checkTwowayOnly(__getProx_name);
-        end_getProx(vector, begin_getProx(usuario, contrasena, __ctx, __explicitCtx, true, null));
+        return end_getProx(begin_getProx(usuario, contrasena, __ctx, __explicitCtx, true, null));
     }
 
     public Ice.AsyncResult begin_getProx(String usuario, String contrasena)
@@ -330,7 +330,7 @@ public final class GetHistorialPrxHelper extends Ice.ObjectPrxHelperBase impleme
         return __result;
     }
 
-    public void end_getProx(StringVectorHolder vector, Ice.AsyncResult __iresult)
+    public String[] end_getProx(Ice.AsyncResult __iresult)
     {
         IceInternal.OutgoingAsync __result = IceInternal.OutgoingAsync.check(__iresult, this, __getProx_name);
         try
@@ -347,8 +347,10 @@ public final class GetHistorialPrxHelper extends Ice.ObjectPrxHelperBase impleme
                 }
             }
             IceInternal.BasicStream __is = __result.startReadParams();
-            vector.value = StringVectorHelper.read(__is);
+            String[] __ret;
+            __ret = StringVectorHelper.read(__is);
             __result.endReadParams();
+            return __ret;
         }
         finally
         {
@@ -362,10 +364,10 @@ public final class GetHistorialPrxHelper extends Ice.ObjectPrxHelperBase impleme
     static public void __getProx_completed(Ice.TwowayCallbackArg1<String[]> __cb, Ice.AsyncResult __result)
     {
         utils.GetHistorialPrx __proxy = (utils.GetHistorialPrx)__result.getProxy();
-        StringVectorHolder vector = new StringVectorHolder();
+        String[] __ret = null;
         try
         {
-            __proxy.end_getProx(vector, __result);
+            __ret = __proxy.end_getProx(__result);
         }
         catch(Ice.LocalException __ex)
         {
@@ -377,25 +379,25 @@ public final class GetHistorialPrxHelper extends Ice.ObjectPrxHelperBase impleme
             __cb.exception(__ex);
             return;
         }
-        __cb.response(vector.value);
+        __cb.response(__ret);
     }
 
     private static final String __getTemp_name = "getTemp";
 
-    public void getTemp(String usuario, String contrasena, StringVectorHolder vector)
+    public String[] getTemp(String usuario, String contrasena)
     {
-        getTemp(usuario, contrasena, vector, null, false);
+        return getTemp(usuario, contrasena, null, false);
     }
 
-    public void getTemp(String usuario, String contrasena, StringVectorHolder vector, java.util.Map<String, String> __ctx)
+    public String[] getTemp(String usuario, String contrasena, java.util.Map<String, String> __ctx)
     {
-        getTemp(usuario, contrasena, vector, __ctx, true);
+        return getTemp(usuario, contrasena, __ctx, true);
     }
 
-    private void getTemp(String usuario, String contrasena, StringVectorHolder vector, java.util.Map<String, String> __ctx, boolean __explicitCtx)
+    private String[] getTemp(String usuario, String contrasena, java.util.Map<String, String> __ctx, boolean __explicitCtx)
     {
         __checkTwowayOnly(__getTemp_name);
-        end_getTemp(vector, begin_getTemp(usuario, contrasena, __ctx, __explicitCtx, true, null));
+        return end_getTemp(begin_getTemp(usuario, contrasena, __ctx, __explicitCtx, true, null));
     }
 
     public Ice.AsyncResult begin_getTemp(String usuario, String contrasena)
@@ -508,7 +510,7 @@ public final class GetHistorialPrxHelper extends Ice.ObjectPrxHelperBase impleme
         return __result;
     }
 
-    public void end_getTemp(StringVectorHolder vector, Ice.AsyncResult __iresult)
+    public String[] end_getTemp(Ice.AsyncResult __iresult)
     {
         IceInternal.OutgoingAsync __result = IceInternal.OutgoingAsync.check(__iresult, this, __getTemp_name);
         try
@@ -525,8 +527,10 @@ public final class GetHistorialPrxHelper extends Ice.ObjectPrxHelperBase impleme
                 }
             }
             IceInternal.BasicStream __is = __result.startReadParams();
-            vector.value = StringVectorHelper.read(__is);
+            String[] __ret;
+            __ret = StringVectorHelper.read(__is);
             __result.endReadParams();
+            return __ret;
         }
         finally
         {
@@ -540,10 +544,10 @@ public final class GetHistorialPrxHelper extends Ice.ObjectPrxHelperBase impleme
     static public void __getTemp_completed(Ice.TwowayCallbackArg1<String[]> __cb, Ice.AsyncResult __result)
     {
         utils.GetHistorialPrx __proxy = (utils.GetHistorialPrx)__result.getProxy();
-        StringVectorHolder vector = new StringVectorHolder();
+        String[] __ret = null;
         try
         {
-            __proxy.end_getTemp(vector, __result);
+            __ret = __proxy.end_getTemp(__result);
         }
         catch(Ice.LocalException __ex)
         {
@@ -555,7 +559,7 @@ public final class GetHistorialPrxHelper extends Ice.ObjectPrxHelperBase impleme
             __cb.exception(__ex);
             return;
         }
-        __cb.response(vector.value);
+        __cb.response(__ret);
     }
 
     public static GetHistorialPrx checkedCast(Ice.ObjectPrx __obj)

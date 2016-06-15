@@ -68,8 +68,6 @@ public class JDBC {
 			getStatements();
 			id = stmt.executeUpdate(sql);
 
-			System.out.println(id);
-
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		} finally {
@@ -108,7 +106,8 @@ public class JDBC {
 	}
 
 	public int getIdTabla(String tabla, String nombre) {
-		String sql = "SELECT " + tabla + "Id FROM " + tabla + " WHERE nombre = \"" + nombre + "\";";
+		String sql = "SELECT " + tabla + "Id FROM " + tabla + " "
+				+ "WHERE nombre = \"" + nombre + "\";";
 		int num = 0;
 
 		try {
@@ -132,8 +131,10 @@ public class JDBC {
 
 		ArrayList<Proximidad> list = new ArrayList<Proximidad>();
 
-		String sql = "SELECT medicion.fecha, medicion.unidad, sensor.habitacionId " + "FROM medicion, sensor, tipoSensor "
-				+ "WHERE medicion.sensorId = sensor.sensorId " + "AND sensor.tipoSensorId = tipoSensor.tipoSensorId "
+		String sql = "SELECT medicion.fecha, medicion.unidad, sensor.habitacionId "
+				+ "FROM medicion, sensor, tipoSensor "
+				+ "WHERE medicion.sensorId = sensor.sensorId "
+				+ "AND sensor.tipoSensorId = tipoSensor.tipoSensorId "
 				+ "AND tipoSensor.nombre = \"Sensor presencia\";";
 
 		try {
@@ -162,8 +163,10 @@ public class JDBC {
 
 		ArrayList<Temperatura> list = new ArrayList<Temperatura>();
 
-		String sql = "SELECT medicion.fecha, medicion.valor, medicion.unidad, sensor.habitacionId " + "FROM medicion, sensor, tipoSensor "
-				+ "WHERE medicion.sensorId = sensor.sensorId " + "AND sensor.tipoSensorId = tipoSensor.tipoSensorId "
+		String sql = "SELECT medicion.fecha, medicion.valor, medicion.unidad, sensor.habitacionId "
+				+ "FROM medicion, sensor, tipoSensor "
+				+ "WHERE medicion.sensorId = sensor.sensorId "
+				+ "AND sensor.tipoSensorId = tipoSensor.tipoSensorId "
 				+ "AND tipoSensor.nombre = \"Sensor temperatura\";";
 
 		try {
@@ -224,8 +227,8 @@ public class JDBC {
 
 	private int comprobarUsuario(String usuario, String contrasena) {
 		String sql = "SELECT usuarioId, DNI, contrasena "
-				+ "FROM usuario"
-				+ "WHERE DNI = \"" + usuario + "\""
+				+ "FROM usuario "
+				+ "WHERE DNI = \"" + usuario + "\" "
 				+ "AND contrasena = \"" + contrasena + "\";";
 		
 		try {
@@ -250,16 +253,46 @@ public class JDBC {
 		}
 		return -1;
 	}
+	
+	private int comprobarUsuario(String numero) {
+		String sql = "SELECT usuarioId, numero "
+				+ "FROM usuario "
+				+ "WHERE numero = \"" + numero + "\";";
+		
+		
+		try {
+			conn = getConnection();
+			getStatements();
+			result = stmt.executeQuery(sql);
 
-	public int comprobarEstancia(String usuario, String contrasena, Date inicio, Date fin) {
+			if (result.next()) {
+				int usuarioId = result.getInt(1);
+				
+				conn.close();
+				
+				return usuarioId;
+			} else {
+				conn.close();
+				return -1;
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return -1;
+	}
+
+	public Alojamiento comprobarEstancia(String usuario, String contrasena, Date inicio, Date fin) {
 		int habitacionId = -1;
+		Alojamiento a = null;
 		
 		int usuarioId = comprobarUsuario(usuario, contrasena);
 		
-		if (usuarioId == -1) return -1;
+		if (usuarioId == -1) return null;
 		
-		String sql = "SELECT usuarioId, habitacionId, inicio, fin "
-				+ "FROM hospeda"
+		String sql = "SELECT usuarioId, habitacionId, inicio, final "
+				+ "FROM hospeda "
 				+ "WHERE usuarioId = \"" + usuarioId + "\";";
 		
 		try {
@@ -272,6 +305,8 @@ public class JDBC {
 				inicio = result.getDate(3);
 				fin = result.getDate(4);
 			}
+			
+			a = new Alojamiento("User", String.valueOf(habitacionId), inicio, fin);
 
 			conn.close();
 
@@ -280,7 +315,7 @@ public class JDBC {
 			e.printStackTrace();
 		}
 
-		return habitacionId;
+		return a;
 		
 	}
 
@@ -292,7 +327,7 @@ public class JDBC {
 		if (usuarioId == -1) return -1;
 		
 		String sql = "SELECT usuarioId, habitacionId "
-				+ "FROM hospeda"
+				+ "FROM hospeda "
 				+ "WHERE usuarioId = \"" + usuarioId + "\";";
 		
 		try {
@@ -312,6 +347,37 @@ public class JDBC {
 		}
 
 		return habitacionId;
+	}
+	
+	public int comprobarEstancia(String numero) {
+		int habitacionId = -1;
+		
+		int usuarioId = comprobarUsuario(numero);
+		
+		if (usuarioId == -1) return -1;
+		
+		String sql = "SELECT usuarioId, habitacionId "
+				+ "FROM hospeda "
+				+ "WHERE usuarioId = " + usuarioId + ";";
+		
+		try {
+			conn = getConnection();
+			getStatements();
+			result = stmt.executeQuery(sql);
+
+			while (result.next()) {
+				habitacionId = result.getInt(2);
+			}
+
+			conn.close();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return habitacionId;
+		
 	}
 	
 }

@@ -75,14 +75,14 @@ public abstract class _GetHistorialDisp extends Ice.ObjectImpl implements GetHis
         return comprobarUsuario(usuario, contrasena, null);
     }
 
-    public final void getProx(String usuario, String contrasena, StringVectorHolder vector)
+    public final String[] getProx(String usuario, String contrasena)
     {
-        getProx(usuario, contrasena, vector, null);
+        return getProx(usuario, contrasena, null);
     }
 
-    public final void getTemp(String usuario, String contrasena, StringVectorHolder vector)
+    public final String[] getTemp(String usuario, String contrasena)
     {
-        getTemp(usuario, contrasena, vector, null);
+        return getTemp(usuario, contrasena, null);
     }
 
     public static Ice.DispatchStatus ___comprobarUsuario(GetHistorial __obj, IceInternal.Incoming __inS, Ice.Current __current)
@@ -110,10 +110,9 @@ public abstract class _GetHistorialDisp extends Ice.ObjectImpl implements GetHis
         usuario = __is.readString();
         contrasena = __is.readString();
         __inS.endReadParams();
-        StringVectorHolder vector = new StringVectorHolder();
-        __obj.getProx(usuario, contrasena, vector, __current);
+        String[] __ret = __obj.getProx(usuario, contrasena, __current);
         IceInternal.BasicStream __os = __inS.__startWriteParams(Ice.FormatType.DefaultFormat);
-        StringVectorHelper.write(__os, vector.value);
+        StringVectorHelper.write(__os, __ret);
         __inS.__endWriteParams(true);
         return Ice.DispatchStatus.DispatchOK;
     }
@@ -127,10 +126,9 @@ public abstract class _GetHistorialDisp extends Ice.ObjectImpl implements GetHis
         usuario = __is.readString();
         contrasena = __is.readString();
         __inS.endReadParams();
-        StringVectorHolder vector = new StringVectorHolder();
-        __obj.getTemp(usuario, contrasena, vector, __current);
+        String[] __ret = __obj.getTemp(usuario, contrasena, __current);
         IceInternal.BasicStream __os = __inS.__startWriteParams(Ice.FormatType.DefaultFormat);
-        StringVectorHelper.write(__os, vector.value);
+        StringVectorHelper.write(__os, __ret);
         __inS.__endWriteParams(true);
         return Ice.DispatchStatus.DispatchOK;
     }

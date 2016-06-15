@@ -24,7 +24,7 @@ public interface _GetHistorialOperationsNC
 {
     boolean comprobarUsuario(String usuario, String contrasena);
 
-    void getProx(String usuario, String contrasena, StringVectorHolder vector);
+    String[] getProx(String usuario, String contrasena);
 
-    void getTemp(String usuario, String contrasena, StringVectorHolder vector);
+    String[] getTemp(String usuario, String contrasena);
 }

@@ -3,7 +3,7 @@ module utils {
   
     interface GetHistorial {
         bool comprobarUsuario(string usuario, string contrasena);
-        void getProx(string usuario, string contrasena, out StringVector vector);
-        void getTemp(string usuario, string contrasena, out StringVector vector);
+        StringVector getProx(string usuario, string contrasena);
+        StringVector getTemp(string usuario, string contrasena);
     };
 };

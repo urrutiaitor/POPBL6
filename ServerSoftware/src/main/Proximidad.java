@@ -38,7 +38,9 @@ public class Proximidad {
 
 	@Override
 	public String toString() {
-		return "Proximidad [tiempo=" + tiempo + ", situacion=" + situacion + "]";
+		return "Proximidad -> tiempo=" + tiempo + ", situacion=" + situacion + ", habitacion=" + String.valueOf(habitacion);
 	}
+
+	
 	
 }

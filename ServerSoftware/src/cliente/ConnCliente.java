@@ -30,6 +30,7 @@ public class ConnCliente {
 		id = ic.stringToIdentity("TheConsultor");
 		adapter.add(object, id);
 		adapter.activate();
+		System.out.println("ICE Server activated");
 	}
 
 	public void close() {

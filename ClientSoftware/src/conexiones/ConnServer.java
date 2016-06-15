@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import main.Proximidad;
 import main.Temperatura;
-import utils.StringVectorHolder;
 
 public class ConnServer {
 
@@ -13,29 +12,29 @@ public class ConnServer {
 	utils.StringVectorHolder vectorHolder = new utils.StringVectorHolder();
 	static utils.GetHistorialPrx theConsultor;
 	
-	public ConnServer() {
+	public ConnServer(String serverIp) {
 		
 		try {
 			ic = Ice.Util.initialize();
-			Ice.ObjectPrx base = ic.stringToProxy("TheVectorManipulator:default -p 10000");
+			Ice.ObjectPrx base = ic.stringToProxy("TheConsultor:default -h " + serverIp + " -p 10000");
 			theConsultor = utils.GetHistorialPrxHelper.checkedCast(base);
 			if (theConsultor == null)
 				throw new Error("Invalid proxy");
 			
-			ic.destroy();
 		} catch (Exception e) {
 			System.out.println("ERROR : " + e);
 			e.printStackTrace(System.out);
 		}
+		
+		System.out.println("ICE Client activated");
 	}
 
-	public static ArrayList<Proximidad> getProximidad(String usuario, String contrasena) {
-		StringVectorHolder vector = new StringVectorHolder();
-		theConsultor.getProx(usuario, contrasena, vector);
+	public ArrayList<Proximidad> getProximidad(String usuario, String contrasena) {
+		String[] vector = theConsultor.getProx(usuario, contrasena);
 		ArrayList<Proximidad> proxList = new ArrayList<Proximidad>();
 		
-		for (int i = 0; i < vector.value.length; i++) {
-			String data[] = vector.value[i].split("%");
+		for (int i = 0; i < vector.length; i++) {
+			String data[] = vector[i].split("%");
 			
 			Date date = new Date(Long.parseLong(data[0]));
 			String situacion = data[1];
@@ -49,13 +48,12 @@ public class ConnServer {
 		
 	}
 
-	public static ArrayList<Temperatura> getTemperatura(String usuario, String contrasena) {
-		StringVectorHolder vector = new StringVectorHolder();
-		theConsultor.getTemp(usuario, contrasena, vector);
+	public ArrayList<Temperatura> getTemperatura(String usuario, String contrasena) {
+		String[] vector = theConsultor.getTemp(usuario, contrasena);
 		ArrayList<Temperatura> proxList = new ArrayList<Temperatura>();
 		
-		for (int i = 0; i < vector.value.length; i++) {
-			String data[] = vector.value[i].split("%");
+		for (int i = 0; i < vector.length; i++) {
+			String data[] = vector[i].split("%");
 			
 			double valor = Double.parseDouble(data[0]);
 			Date date = new Date(Long.parseLong(data[1]));

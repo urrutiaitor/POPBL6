@@ -23,21 +23,24 @@ public class DialogoInicio extends JDialog implements ActionListener {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	
 	JTextField usuario;
 	JPasswordField contrasena;
 	JButton boton;
 	
+	String serverIp;
+	
 	ConnServer connServer;
 	
-	public DialogoInicio () {
+	public DialogoInicio (String serverIp) {
 		this.setLocation(100, 100);
 		this.setSize(300, 200);
 		this.setContentPane(createPane());
 		this.setVisible(true);
 		this.setModal(false);
 		
-		connServer = new ConnServer();
+		this.serverIp = serverIp;
+		
+		connServer = new ConnServer(serverIp);
 	}
 
 	private Container createPane() {
@@ -65,10 +68,12 @@ public class DialogoInicio extends JDialog implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand() == "Entrar") {
-			ConnServer connS = new ConnServer();
-			if (connServer.comprobarUsuario(usuario.getText(), contrasena.getText().hashCode() + "")) {
+			ConnServer connS = new ConnServer(serverIp);
+			String u = usuario.getText();
+			String p = String.valueOf(contrasena.getText().hashCode());
+			if (connServer.comprobarUsuario(u, p)) {
 				this.dispose();
-				Window window = new Window (connS, usuario.getText(), contrasena.getText().hashCode() + "");
+				Window window = new Window (connS, u, p);
 			} else {
 				JOptionPane.showMessageDialog(this, "El usuario o contrasena no son correctos", "Acceso fallido", JOptionPane.ERROR_MESSAGE);
 				usuario.setText("");

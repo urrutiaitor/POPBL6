@@ -1,10 +1,10 @@
 package cliente;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.ListIterator;
 
 import Ice.Current;
+import main.Alojamiento;
 import main.Proximidad;
 import main.Temperatura;
 import mysql.JDBC;
@@ -13,50 +13,55 @@ import utils.StringVectorHolder;
 public class ConsultorI extends utils._GetHistorialDisp {
 
 	JDBC jdbc;
-	Date inicio;
-	Date fin;
 	
 	public ConsultorI(String serverIp) {
 		jdbc = new JDBC(serverIp);
 	}
 
 	@Override
-	public void getProx(String usuario, String contrasena, StringVectorHolder vector, Current __current) {
+	public String[] getProx(String usuario, String contrasena, Current __current) {
 
-		int habitacionId = jdbc.comprobarEstancia(usuario, contrasena, inicio, fin);
+		Alojamiento a = jdbc.comprobarEstancia(usuario, contrasena, null, null);
 		
 		ArrayList<Proximidad> proximidad = jdbc.getProximidad();
 		ListIterator<Proximidad> proximidadIt = proximidad.listIterator();
 
 		while (proximidadIt.hasNext()) {
 			Proximidad p = proximidadIt.next();
+			
+			System.out.println("PROXIMIDAD: " + p.toString());
+			System.out.println("ALOJAMIENTO: " + a.toString() + "\n");
 
-			if (p.getHabitacion() != habitacionId) {
+			if (p.getHabitacion() != Integer.valueOf(a.getHabitacion())) {
 				proximidadIt.remove();
 			} else {
-				if (p.getTiempo().after(fin)) {
+				if (p.getTiempo().after(a.getFin())) {
 					proximidadIt.remove();
 				} else {
-					if (p.getTiempo().before(inicio))
+					if (p.getTiempo().before(a.getInicio()))
 						proximidadIt.remove();
 				}
 			}
 		}
 		
-		String[] v = vector.value;
+		
+		String[] stringVector = new String[proximidad.size()];
 		
 		for (int i = 0; i < proximidad.size(); i++) {
-			
-			v[i] = proximidad.get(i).getTiempo().getTime() + "%" + proximidad.get(i).getSituacion() + "%" + proximidad.get(i).getHabitacion();
+			long time = proximidad.get(i).getTiempo().getTime();
+			String situacion = proximidad.get(i).getSituacion();
+			int habitacion = proximidad.get(i).getHabitacion();
+			stringVector[i] = time + "%" + situacion + "%" + habitacion;
 			
 		}
 		
+		return stringVector;
 	}
 
 	@Override
-	public void getTemp(String usuario, String contrasena, StringVectorHolder vector, Current __current) {
+	public String[] getTemp(String usuario, String contrasena, Current __current) {
 
-		int habitacionId = jdbc.comprobarEstancia(usuario, contrasena, inicio, fin);
+		Alojamiento a = jdbc.comprobarEstancia(usuario, contrasena, null, null);
 		
 		ArrayList<Temperatura> temperatura = jdbc.getTemperatura();
 		ListIterator<Temperatura> temperaturaIt = temperatura.listIterator();
@@ -64,30 +69,35 @@ public class ConsultorI extends utils._GetHistorialDisp {
 		while (temperaturaIt.hasNext()) {
 			Temperatura t = temperaturaIt.next();
 
-			if (t.getHabitacion() != habitacionId) {
+			if (t.getHabitacion() != Integer.valueOf(a.getHabitacion())) {
 				temperaturaIt.remove();
 			} else {
-				if (t.getTiempo().after(fin)) {
+				if (t.getTiempo().after(a.getFin())) {
 					temperaturaIt.remove();
 				} else {
-					if (t.getTiempo().before(inicio))
+					if (t.getTiempo().before(a.getInicio()))
 						temperaturaIt.remove();
 				}
 			}
 		}
 		
-		String[] v = vector.value;
+		String[] stringVector = new String[temperatura.size()];
 		
 		for (int i = 0; i < temperatura.size(); i++) {
-			
-			v[i] = temperatura.get(i).getTiempo().getTime() + "%" + temperatura.get(i).getSituacion() + "%" + temperatura.get(i).getHabitacion();
-			
+			double valor = temperatura.get(i).getValor();
+			long time = temperatura.get(i).getTiempo().getTime();
+			String situacion = temperatura.get(i).getSituacion();
+			int habitacion = temperatura.get(i).getHabitacion();
+			stringVector[i] = valor + "%" + time + "%" + situacion + "%" + habitacion;
 		}
+		
+		return stringVector;
 	}
 
 	@Override
 	public boolean comprobarUsuario(String usuario, String contrasena, Current __current) {
-		if (jdbc.comprobarEstancia(usuario, contrasena) > -1) return true;
+		int r = jdbc.comprobarEstancia(usuario, contrasena);
+		if (r > -1) return true;
 		return false;
 		
 	}

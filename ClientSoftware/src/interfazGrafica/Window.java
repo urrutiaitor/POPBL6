@@ -34,15 +34,16 @@ public class Window extends JFrame {
 	
 	
 	public Window(ConnServer connS, String usuario, String contrasena) {
-		this.setContentPane(createFrame());
-		this.setLocation(300, 200);
-		this.setSize(640, 480);
-		this.setVisible(true);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
 		this.conn = connS;
 		this.usuario = usuario;
 		this.contrasena = contrasena;
+		
+		this.setContentPane(createFrame());
+		this.setLocation(200, 100);
+		this.setSize(640*2, 480*2);
+		this.setVisible(true);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 	}
 
 	private Container createFrame() {

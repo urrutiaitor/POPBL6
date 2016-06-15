@@ -1,0 +1,96 @@
+package cliente;
+
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.ListIterator;
+
+import Ice.Current;
+import main.Alojamiento;
+import main.Proximidad;
+import main.Temperatura;
+import mysql.JDBC;
+import utils.StringVectorHolder;
+
+public class ConsultorI extends utils._GetHistorialDisp {
+
+	JDBC jdbc;
+	
+	public ConsultorI(String serverIp) {
+		jdbc = new JDBC(serverIp);
+	}
+
+	@Override
+	public void getProx(String usuario, String contrasena, StringVectorHolder vector, Current __current) {
+
+		Alojamiento a = jdbc.comprobarEstancia(usuario, contrasena, null, null);
+		
+		ArrayList<Proximidad> proximidad = jdbc.getProximidad();
+		ListIterator<Proximidad> proximidadIt = proximidad.listIterator();
+
+		while (proximidadIt.hasNext()) {
+			Proximidad p = proximidadIt.next();
+			
+			System.out.println("PROXIMIDAD: " + p.toString());
+			System.out.println("ALOJAMIENTO: " + a.toString() + "\n");
+
+			if (p.getHabitacion() != Integer.valueOf(a.getHabitacion())) {
+				proximidadIt.remove();
+			} else {
+				if (p.getTiempo().after(a.getFin())) {
+					proximidadIt.remove();
+				} else {
+					if (p.getTiempo().before(a.getInicio()))
+						proximidadIt.remove();
+				}
+			}
+		}
+		
+		System.out.println(proximidad.get(0).toString());
+		
+		for (int i = 0; i < proximidad.size(); i++) {
+			System.out.println("Loop");
+			vector.value[i] = proximidad.get(i).getTiempo().getTime() + "%" + proximidad.get(i).getSituacion() + "%" + proximidad.get(i).getHabitacion();
+			
+		}
+		
+	}
+
+	@Override
+	public void getTemp(String usuario, String contrasena, StringVectorHolder vector, Current __current) {
+
+		Alojamiento a = jdbc.comprobarEstancia(usuario, contrasena, null, null);
+		
+		ArrayList<Temperatura> temperatura = jdbc.getTemperatura();
+		ListIterator<Temperatura> temperaturaIt = temperatura.listIterator();
+
+		while (temperaturaIt.hasNext()) {
+			Temperatura t = temperaturaIt.next();
+
+			if (t.getHabitacion() != Integer.valueOf(a.getHabitacion())) {
+				temperaturaIt.remove();
+			} else {
+				if (t.getTiempo().after(a.getFin())) {
+					temperaturaIt.remove();
+				} else {
+					if (t.getTiempo().before(a.getInicio()))
+						temperaturaIt.remove();
+				}
+			}
+		}
+		
+		for (int i = 0; i < temperatura.size(); i++) {
+			
+			vector.value[i] = String.valueOf(temperatura.get(i).getTiempo().getTime()) + "%" + temperatura.get(i).getSituacion() + "%" + temperatura.get(i).getHabitacion();
+			
+		}
+	}
+
+	@Override
+	public boolean comprobarUsuario(String usuario, String contrasena, Current __current) {
+		int r = jdbc.comprobarEstancia(usuario, contrasena);
+		if (r > -1) return true;
+		return false;
+		
+	}
+
+}
